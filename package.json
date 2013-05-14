@@ -20,7 +20,7 @@
     },
     "scripts": {
         "test": "./node_modules/mocha/bin/mocha -u tdd -R tap test",
-        "posttest": "./beautify.sh"
+        "beautify": "./beautify.sh"
     },
     "author": "Matthijs van Henten",
     "license": "BSD",
