@@ -84,3 +84,19 @@ Both `validateObject` and `validatePositional` return a `validationObject` with 
 * get: Retrieve values from the original input, array index or key
 * values: Return an array of values ( not that usable )
 * errorString: An error string explaining what went wrong (verbosely)
+
+## Testing
+
+```bash
+cd validate-arguments-js
+npm install
+npm test
+```
+## Contributing
+
+Contributions are welcome, preferably in the form of:
+
+* a pull request adding a feature or fixing a bug
+* a regression test or feature test showing off the new code
+
+Please use the `./beautify.sh` script before commiting!
