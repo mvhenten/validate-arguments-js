@@ -102,7 +102,7 @@ var Validate = {
         var errors = [],
             normalized = _normalizeValidationSpec(validationSpec);
 
-        if (_.isArray(posArguments)) {
+        if (_.isArray(posArguments) || _.isArguments(posArguments)) {
             var validation = validationSpec.map(function(validation, index) {
                 return Validate.isValid(posArguments[index], validation) ? null : index;
             });
