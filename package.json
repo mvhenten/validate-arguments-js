@@ -1,0 +1,20 @@
+{
+    "name": "validate-arguments",
+    "version": "0.0.1",
+    "description": "Validate arguments, declaritive",
+    "main": "./index.js",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:mvhenten/validate-arguments-js.git"
+    },
+    "keywords": [
+    "validation",
+    "declarative"
+    ],
+    "dependencies": {
+        "lodash": ">=1.2.1"
+    },
+    "author": "Matthijs van Henten",
+    "license": "BSD",
+    "readmeFilename": "README.md",
+}
