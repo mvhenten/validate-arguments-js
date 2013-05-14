@@ -24,5 +24,6 @@
     },
     "author": "Matthijs van Henten",
     "license": "BSD",
-    "readmeFilename": "README.md"
+    "readmeFilename": "README.md",
+    "gitHead": "57ce7d688e23bb0970c9bed329d975e50a49005f"
 }

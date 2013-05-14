@@ -3,7 +3,19 @@ validate-arguments-js
 
 Validate arguments, declarative.
 
-This module levarages some of the validation methods from `lodash`:
+## Installation
+
+It's on npm:
+
+```bash
+    npm install validate-arguments
+```
+
+The code itself depends on `lodash`, and will propably run just fine in the browser using `require.js`.
+
+## Documentation
+
+This module levarages some of the validation methods from `lodash`, but by offering you a declaritive syntax and nice error strings:
 
 * array
 * boolean
@@ -26,8 +38,6 @@ And adds the following additional ones:
 * natural ( Positive integer )
 
 When passing a constructor (function) as an `isa`, an `instanceof` check is done.
-
-But by offering you a declaritive syntax and nice error strings:
 
 ```javascript
     var Validate = require('validate-arguments');
