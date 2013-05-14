@@ -11,4 +11,5 @@ pids
 logs
 results
 *.komodoproject
+node_modules
 npm-debug.log
