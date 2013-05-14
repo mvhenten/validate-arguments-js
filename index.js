@@ -21,7 +21,7 @@ var types = 'array boolean date element empty finite function null \
         }
     },
     _normalizeValidationSpec = function(validationSpec) {
-        var normalized;
+        var normalized = {};
 
         _.keys(validationSpec).forEach(function(key) {
             normalized[key] = _.extend({
@@ -133,6 +133,5 @@ var Validate = {
         return validationObject(errors, namedArguments, normalized);
     }
 };
-
 
 module.exports = Validate;
