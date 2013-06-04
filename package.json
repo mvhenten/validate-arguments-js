@@ -1,6 +1,6 @@
 {
     "name": "validate-arguments",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Validate arguments, declaritive",
     "main": "./index.js",
     "repository": {
