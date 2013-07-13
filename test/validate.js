@@ -54,12 +54,12 @@ suite('validate-arguments', function() {
     test('Validate returns a validationObject', function(done) {
         var value = random.string(),
             valid = Validate.validateObject({
-                str: value
-            }, {
-                str: {
-                    isa: 'string'
-                }
-            });
+                    str: value
+                }, {
+                    str: {
+                        isa: 'string'
+                    }
+                });
 
         assert.ok(valid.isValid(), 'isValid returns a true value');
         assert.equal(valid.get('str'), value, 'get returns expected value');
@@ -68,7 +68,7 @@ suite('validate-arguments', function() {
         assert.deepEqual(valid.values(), [value], 'Values returns the values of the object');
 
         valid = Validate.validatePositional([value], [{
-                isa: 'string'
+                    isa: 'string'
             }]);
 
         assert.ok(valid.isValid(), 'isValid returns a true value');
@@ -100,7 +100,7 @@ suite('validate-arguments', function() {
                         isa: 'string'
                     }
                 },
-                expect: 'missing named argumnent foo'
+                expect: 'missing named argument foo'
             },
             {
                 label: 'Multiple missing arguments',
@@ -115,7 +115,7 @@ suite('validate-arguments', function() {
                         isa: 'number'
                     }
                 },
-                expect: 'missing named argumnent foo, missing named argumnent biz'
+                expect: 'missing named argument foo, missing named argument biz'
             },
             {
                 label: 'Named argument is not a',
@@ -142,7 +142,7 @@ suite('validate-arguments', function() {
                         isa: 'string'
                     }
                 },
-                expect: 'named argument foo is not a "number", missing named argumnent biz'
+                expect: 'named argument foo is not a "number", missing named argument biz'
             }
         ];
 
