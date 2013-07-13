@@ -10,7 +10,9 @@ suite('validate-arguments', function() {
         var cases = [
             {
                 'functions': [
+
                     function() {},
+
                     function() {}]
             },
             {
@@ -36,13 +38,13 @@ suite('validate-arguments', function() {
             assert.doesNotThrow(function() {
                 var valid = Validate.validateObject(values[0], values[1]);
 
-                assert.equal(valid.isValid(), false, 'invalid input is not valid');
+                assert.equal(valid.isValid(), false, 'invalid input is not valid: ' + label);
             });
 
             assert.doesNotThrow(function() {
                 var valid = Validate.validatePositional(values[0], values[1]);
 
-                assert.equal(valid.isValid(), false, 'invalid input is not valid');
+                assert.equal(valid.isValid(), false, 'invalid input is not valid: ' + label);
             });
         });
 
@@ -83,10 +85,10 @@ suite('validate-arguments', function() {
 
         var cases = [
             {
-                label: 'Named arguments missing',
+                label: 'Validation spec missing',
                 args: {},
                 spec: {},
-                expect: 'missing named arguments'
+                expect: 'missing validation spec'
             },
             {
                 label: 'Missing arguments',
@@ -146,13 +148,13 @@ suite('validate-arguments', function() {
 
         cases.forEach(function(testCase) {
             var valid = Validate.validateObject(testCase.args, testCase.spec);
-            assert.equal(valid.isValid(), false);
-            assert.equal(valid.errorString(), testCase.expect);
+
+            assert.equal(valid.isValid(), false, 'not valid: ' + testCase.label);
+            assert.equal(valid.errorString(), testCase.expect, 'errors: ' + testCase.label);
         });
 
         done();
     });
-
 
     test('validate basic types', function(done) {
         // todo generalize test cases for types
@@ -251,4 +253,30 @@ suite('validate-arguments', function() {
         assert.ok(true, 'all is well');
         done();
     });
+
+    test('optionals can be emtpy', function(done) {
+        var undef, values = [{
+                    thing: null
+                }, {
+                    thing: undef
+                }, {}];
+
+        var spec = {
+            thing: {
+                isa: 'plainObject',
+                optional: true
+            }
+        };
+
+        values.map(function(value) {
+            var validated = Validate.validateObject({}, spec);
+
+            assert.equal(validated.isValid(), true, 'optional arguments may be omitted: ' + value.thing);
+        });
+
+        done();
+
+
+    });
+
 });

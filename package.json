@@ -16,11 +16,11 @@
     },
     "devDependencies": {
         "mocha": ">=1.9.0",
-        "js-beautify": ">=1.2.0"
+        "js-beautify": ">=1.2.0",
+        "jshint": "*"
     },
     "scripts": {
-        "test": "./node_modules/mocha/bin/mocha -u tdd -R tap test",
-        "beautify": "./beautify.sh"
+        "test": "./node_modules/mocha/bin/mocha -u tdd -R tap test"
     },
     "author": "Matthijs van Henten",
     "license": "BSD",

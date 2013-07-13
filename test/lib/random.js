@@ -8,8 +8,9 @@ var Random = {
         return Math.random() * 1000000;
     },
 
+
     integer: function() {
-        return parseInt( Random.number(), 10);
+        return parseInt(Random.number(), 10);
     }
 };
 
