@@ -54,12 +54,12 @@ suite('validate-arguments', function() {
     test('Validate returns a validationObject', function(done) {
         var value = random.string(),
             valid = Validate.validateObject({
-                    str: value
-                }, {
-                    str: {
-                        isa: 'string'
-                    }
-                });
+                str: value
+            }, {
+                str: {
+                    isa: 'string'
+                }
+            });
 
         assert.ok(valid.isValid(), 'isValid returns a true value');
         assert.equal(valid.get('str'), value, 'get returns expected value');
@@ -68,7 +68,7 @@ suite('validate-arguments', function() {
         assert.deepEqual(valid.values(), [value], 'Values returns the values of the object');
 
         valid = Validate.validatePositional([value], [{
-                    isa: 'string'
+            isa: 'string'
             }]);
 
         assert.ok(valid.isValid(), 'isValid returns a true value');
@@ -256,9 +256,9 @@ suite('validate-arguments', function() {
 
     test('optionals can be emtpy', function(done) {
         var undef, values = [{
-                    thing: null
+                thing: null
                 }, {
-                    thing: undef
+                thing: undef
                 }, {}];
 
         var spec = {
@@ -277,6 +277,60 @@ suite('validate-arguments', function() {
         done();
 
 
+    });
+
+    test('validation specs can be nested', function() {
+        // TODO add more testcases, both invalid and valid!
+
+        var spec = {
+            thing: {
+                isa: {
+                    nestedThing: {
+                        isa: {
+                            childOfNested: {
+                                isa: 'string'
+                            }
+                        }
+                    },
+                    optionalThing: {
+                        optional: true,
+                        isa: 'string'
+                    }
+                },
+                optional: true
+            }
+        };
+
+        var cases = [
+            {
+                label: 'deep nested object is validated',
+                isValid: true,
+                value: {
+                    thing: {
+                        nestedThing: {
+                            childOfNested: random.string()
+                        }
+                    }
+                }
+            },
+            {
+                label: 'deep nested value must be of valid type',
+                isValid: false,
+                value: {
+                    thing: {
+                        nestedThing: {
+                            childOfNested: random.integer()
+                        }
+                    }
+                }
+            }
+        ];
+
+        cases.map(function(testCase) {
+            var validated = Validate.validateObject(testCase.value, spec);
+
+            assert.equal(validated.isValid(), testCase.isValid, testCase.label);
+        });
     });
 
 });
