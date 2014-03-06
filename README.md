@@ -3,6 +3,8 @@ validate-arguments-js
 
 Validate arguments, declarative.
 
+[![Build Status](https://drone.io/github.com/mvhenten/validate-arguments-js/status.png)](https://drone.io/github.com/mvhenten/validate-arguments-js/latest)
+
 ## Installation
 
 It's on npm:
