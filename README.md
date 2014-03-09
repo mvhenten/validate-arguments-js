@@ -7,8 +7,6 @@ Validate arguments, declarative.
 
 ## Installation
 
-It's on npm:
-
 ```bash
     npm install validate-arguments
 ```
@@ -45,23 +43,15 @@ When passing a constructor (function) as an `isa`, an `instanceof` check is done
     var Validate = require('validate-arguments');
     
     function doSomething(withNamedArguments) {
-        var args = Validate.validateObject(arguments[0], {
-            number: {
-                isa: 'whole'
-            },
-            name: {
-                isa: 'string'
-            },
-            callback: {
-                isa: 'function'
-            },
+        var args = Validate.named(arguments, {
+            number: 'whole',
+            name: 'string'
+            callback: 'function'
             options: {
                 isa: 'plainObject',
                 optional: true
             },
-            validation: {
-                isa: Validate
-            }
+            validation: Validate // performs an instanceof
         });
     
         if (!args.isValid()) {
@@ -73,13 +63,35 @@ When passing a constructor (function) as an `isa`, an `instanceof` check is done
 ```
 Look at the [test cases](https://github.com/mvhenten/validate-arguments-js/blob/master/test/validate.js) for more examples.
 
+Node that validations may be nested:
+
+```javascript
+    var args = Validate.named(arguments, {
+        address: {
+            primary: {
+                street: 'string',
+                housenumber: 'number'
+            }
+        },
+    });
+```
+
 ## Methods
+
+### `named( named, validationSpec )`
+
+Returns a `validationObject` for further inspection. `named` should be a non-empty plain `Object`, containing all the keys documented in the `validationSpec`.
+The `validationSpec` should be an object, where the keys match the desired input. You may use the form `{ thing: 'string' }` over `{ thing: { isa: 'string' } }`.
+
+When passed an `arguments` object instead of a plain object, the first key of the arguments is used.
 
 ### `validateObject( namedArguments, validationSpec )`
 
 Returns a `validationObject` for further inspection. `namedArguments` should be a non-empty plain `Object`, containing all the keys documented in the `validationSpec`, matching their `isa`.
 
 The `validationSpec` should be an object, where the keys match the desired input, pointing to an object with at least one key `isa`.
+
+_note_ The `.named` method does exactly the same, but allows omitting the `isa` key when not needed.
 
 ### `validateObject( positionalArguments, validationSpec )`
 
