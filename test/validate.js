@@ -1,6 +1,7 @@
+'use strict';
+
 var _ = require('lodash'),
     assert = require('assert'),
-    format = require('util').format,
     random = require('./lib/random'),
     Validate = require('../');
 
@@ -333,4 +334,115 @@ suite('validate-arguments', function() {
         });
     });
 
+
+    test('Validate.named is sugar for validateObject', function() {
+        var cases = [
+            {
+                label: 'Validate.named simple',
+                spec: {
+                    name: 'string'
+                },
+                input: {
+                    name: random.string()
+                },
+                expect: true,
+            },
+            {
+                label: 'Validate.named validates',
+                spec: {
+                    name: 'string'
+                },
+                input: {
+                    name: random.integer()
+                },
+                expect: false,
+            },
+            {
+                label: 'Validate.named allows isa',
+                spec: {
+                    name: {
+                        isa: 'string'
+                    }
+                },
+                input: {
+                    name: random.string()
+                },
+                expect: true,
+            },
+            {
+                label: 'Validate.named allows nesting',
+                spec: {
+                    name: {
+                        foo: {
+                            bar: 'string'
+                        }
+                    }
+                },
+                input: {
+                    name: {
+                        foo: {
+                            bar: random.string()
+                        }
+                    }
+                },
+                expect: true,
+            },
+            {
+                label: 'Validate.named allows nesting complexer objects',
+                spec: {
+                    name: {
+                        biz: {
+                            bar: 'string'
+                        },
+                        foo: {
+                            bar: 'string'
+                        }
+                    }
+                },
+                input: {
+                    name: {
+                        biz: {
+                            bar: random.string()
+                        },
+                        foo: {
+                            bar: random.string()
+                        }
+                    }
+                },
+                expect: true,
+            },
+            {
+                label: 'Validate.named validates nested complexer objects',
+                spec: {
+                    name: {
+                        biz: {
+                            bar: 'string'
+                        },
+                        foo: {
+                            bar: 'number'
+                        }
+                    }
+                },
+                input: {
+                    name: {
+                        biz: {
+                            bar: random.string()
+                        },
+                        foo: {
+                            bar: random.string()
+                        }
+                    }
+                },
+                expect: false,
+            }
+        ];
+
+        _.each(cases, function(testCase) {
+            var validated = Validate.named(testCase.input, testCase.spec);
+
+            assert.equal(validated.isValid(), testCase.expect);
+
+        });
+
+    });
 });
