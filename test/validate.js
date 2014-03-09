@@ -279,4 +279,28 @@ suite('validate-arguments', function() {
 
     });
 
+    test('"isa" key can be omitted', function(done) {
+        var validated = Validate.validateObject({
+            a: 1,
+            b: 'a',
+            c: true,
+            d: false,
+            e: random.number(),
+            f: random.integer()
+        }, {
+            a: 'number',
+            b: 'string',
+            c: 'boolean',
+            d: 'boolean',
+            e: 'number',
+            f: 'whole'
+        });
+        assert.equal(validated.isValid(), true, 'values are validated by shortened spec');
+
+        validated = Validate.validatePositional(['a'], ['string']);
+        assert.equal(validated.isValid(), true, 'values are validated by shortened spec');
+
+        done();
+    });
+
 });
