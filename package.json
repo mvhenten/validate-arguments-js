@@ -17,9 +17,7 @@
     "devDependencies": {
         "mocha": ">=1.9.0",
         "js-beautify": "~1.4.2",
-        "jshint": "*",
-        "underscore": "~1.6.0",
-        "mockery": "~1.4.0"
+        "jshint": "*"
     },
     "scripts": {
         "test": "./node_modules/mocha/bin/mocha -u tdd -R tap test"
