@@ -12,7 +12,8 @@
     "declarative"
   ],
     "dependencies": {
-        "lodash": ">=1.2.1"
+        "lodash": ">=1.2.1",
+        "sliced": "0.0.5"
     },
     "devDependencies": {
         "mocha": ">=1.9.0",
