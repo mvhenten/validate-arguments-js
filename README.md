@@ -36,6 +36,7 @@ And adds the following additional ones:
 * whole ( An integer )
 * real ( A real number that isn't NaN )
 * natural ( Positive integer )
+* primitive ( 'number', 'boolean', 'string' )
 
 When passing a constructor (function) as an `isa`, an `instanceof` check is done.
 
@@ -78,26 +79,22 @@ Node that validations may be nested:
 
 ## Methods
 
-### `named( named, validationSpec )`
+#### `named( named, validationSpec )`
 
 Returns a `validationObject` for further inspection. `named` should be a non-empty plain `Object`, containing all the keys documented in the `validationSpec`.
 The `validationSpec` should be an object, where the keys match the desired input. You may use the form `{ thing: 'string' }` over `{ thing: { isa: 'string' } }`.
 
 When passed an `arguments` object instead of a plain object, the first key of the arguments is used.
 
-### `validateObject( namedArguments, validationSpec )`
+#### `positional( arguments, ... )`
 
-Returns a `validationObject` for further inspection. `namedArguments` should be a non-empty plain `Object`, containing all the keys documented in the `validationSpec`, matching their `isa`.
+Validate positional arguments, either an array or arguments object. Spec may be provided as an array in the second argument, or a variable number of arguments.
 
-The `validationSpec` should be an object, where the keys match the desired input, pointing to an object with at least one key `isa`.
+#### `validate( arguments, ... )`
 
-_note_ The `.named` method does exactly the same, but allows omitting the `isa` key when not needed.
+Validate arguments, freeform.
 
-### `validateObject( positionalArguments, validationSpec )`
-
-Returns a `validationObject` for further inspection. `positionalArguments` should be a non-empty plain `Array`, containing values matching values in the `validationSpec`.
-
-The `validationSpec` should be an array of objects, each with at least one key `isa`.
+If the second argument contains a string, it is treated as a positional argument with one element.
 
 ### Return values
 
@@ -116,11 +113,4 @@ cd validate-arguments-js
 npm install
 npm test
 ```
-## Contributing
 
-Contributions are welcome, preferably in the form of:
-
-* a pull request adding a feature or fixing a bug
-* a regression test or feature test showing off the new code
-
-Please use the `./beautify.sh` script before commiting!
