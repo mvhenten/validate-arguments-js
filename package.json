@@ -24,7 +24,7 @@
         "test": "./node_modules/mocha/bin/mocha -u tdd -R tap test"
     },
     "author": "Matthijs van Henten",
-    "license": "LGPL",
+    "license": "MIT",
     "readmeFilename": "README.md",
     "gitHead": "fc61c6fd820cce30ef21688b91203e486db3255f"
 }
