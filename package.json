@@ -1,6 +1,6 @@
 {
     "name": "validate-arguments",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "Validate arguments, declaritive",
     "main": "./index.js",
     "repository": {
@@ -25,6 +25,5 @@
     },
     "author": "Matthijs van Henten",
     "license": "MIT",
-    "readmeFilename": "README.md",
-    "gitHead": "fc61c6fd820cce30ef21688b91203e486db3255f"
+    "readmeFilename": "README.md"
 }
