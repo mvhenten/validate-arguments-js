@@ -334,6 +334,59 @@ suite('validate-arguments', function() {
         });
     });
 
+    test('validation specs can be nested arrays!', function() {
+        // TODO add more testcases, both invalid and valid!
+        var spec = {
+            thing: {
+                isa: [{
+                    nestedThing: {
+                        isa: {
+                            childOfNested: {
+                                isa: 'string'
+                            }
+                        }
+                    },
+                    optionalThing: {
+                        optional: true,
+                        isa: 'string'
+                    }
+                }],
+                optional: true
+            }
+        };
+
+        var cases = [
+            {
+                label: 'deep nested object is validated',
+                isValid: true,
+                value: {
+                    thing: [{
+                        nestedThing: {
+                            childOfNested: random.string()
+                        }
+                    }]
+                }
+            },
+            {
+                label: 'deep nested value must be of valid type',
+                isValid: false,
+                value: {
+                    thing: [{
+                        nestedThing: {
+                            childOfNested: random.integer()
+                        }
+                    }]
+                }
+            }
+        ];
+
+        cases.map(function(testCase) {
+            var validated = Validate.validateObject(testCase.value, spec);
+
+            assert.equal(validated.isValid(), testCase.isValid, testCase.label);
+        });
+    });
+
 
     test('Validate.named is sugar for validateObject', function() {
         var cases = [
